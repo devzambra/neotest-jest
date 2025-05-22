@@ -31,19 +31,21 @@ local function rootProjectHasJestDependency()
   local parsedPackageJson = vim.json.decode(packageJsonContent)
 
   if parsedPackageJson["dependencies"] then
-    for key, _ in pairs(parsedPackageJson["dependencies"]) do
-      if key == "jest" then
-        return true
-      end
-    end
+    return true
+    -- for key, _ in pairs(parsedPackageJson["dependencies"]) do
+    --   if key == "jest" then
+    --     return true
+    --   end
+    -- end
   end
 
   if parsedPackageJson["devDependencies"] then
-    for key, _ in pairs(parsedPackageJson["devDependencies"]) do
-      if key == "jest" then
-        return true
-      end
-    end
+    return true
+    -- for key, _ in pairs(parsedPackageJson["devDependencies"]) do
+    --   if key == "jest" then
+    --     return true
+    --   end
+    -- end
   end
 
   return false
@@ -410,7 +412,7 @@ function adapter.build_spec(args)
   end
 
   vim.list_extend(command, {
-    "--no-coverage",
+    "--coverage",
     "--testLocationInResults",
     "--verbose",
     "--json",
